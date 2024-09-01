@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vorgangsknoten-Netzplan</title>
+</head>
+<body>
+    <h1>Vorgangsknoten-Netzplan</h1>
+    <form method="post">
+        <label for="name">Vorgangsname:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="duration">Dauer:</label>
+        <input type="number" id="duration" name="duration" required>
+        <label for="predecessors">Vorgänger (kommagetrennt):</label>
+        <input type="text" id="predecessors" name="predecessors">
+        <button type="submit">Hinzufügen</button>
+    </form>
+
+    <h2>Netzplan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Vorgang</th>
+                <th>FAZ</th>
+                <th>FEZ</th>
+                <th>SEZ</th>
+                <th>SAZ</th>
+                <th>GP</th>
+                <th>FP</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in network_plan.tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.faz }}</td>
+                <td>{{ task.fez }}</td>
+                <td>{{ task.sez }}</td>
+                <td>{{ task.saz }}</td>
+                <td>{{ task.gp }}</td>
+                <td>{{ task.fp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Kritischer Pfad</h2>
+    <p>{{ network_plan.critical_path }}</p>
+</body>
+</html>
